@@ -50,6 +50,7 @@ console.log(safeUrl);
 - 🌟 [GitHubリポジトリ](https://github.com/onjmin/cors-killer)
 - 🛫 [仕様書 / ドキュメント](https://onjmin.github.io/cors-killer)
 - 📦 [npm パッケージ](https://www.npmjs.com/package/@onjmin/cors-killer)
+- ✅ [カバレッジ](https://onjmin.github.io/cors-killer/coverage)
 
 ## ライセンス / License
 - **AGPL-3.0**  

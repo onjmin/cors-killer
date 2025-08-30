@@ -5,7 +5,7 @@ export default defineConfig({
 		coverage: {
 			provider: "v8", // ここで v8 or istanbul を選択
 			reporter: ["text", "json", "html"],
-			reportsDirectory: "./tests/unit/coverage",
+			reportsDirectory: "./tests/coverage",
 			include: ["src/**/*.{ts,js}"], // カバレッジ対象
 			exclude: [
 				"src/index.ts",

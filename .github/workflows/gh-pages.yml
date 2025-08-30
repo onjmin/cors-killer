@@ -42,7 +42,7 @@ jobs:
         run: mkdir -p coverage
 
       - name: Copy coverage report
-        run: cp -r ./tests/unit/coverage ./docs/coverage
+        run: cp -r ./tests/coverage ./docs/coverage
 
       - name: Add .nojekyll
         run: touch ./docs/.nojekyll

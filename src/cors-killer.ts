@@ -25,8 +25,11 @@ export const corsKiller = (url: string): string => {
 		// URL オブジェクトのインスタンスを経由して href を取得する方が安全
 		href = u.href;
 
-		// data URI（Base64埋め込み形式）はそのまま使用
-		if (u.protocol === "data:") return href;
+		// プロキシを通す必要がないスキーマはそのまま返す
+		// - data:  → Base64 埋め込み形式の画像など
+		// - blob:  → JavaScript 内で生成した Blob URL
+		// - file:  → ローカルファイル（ブラウザ制限あり）
+		if (["data:", "blob:", "file:"].includes(u.protocol)) return href;
 
 		// CORS制限のないホワイトリストに含まれていればプロキシ不要
 		if (CORS_FREE_HOSTS.some((fn) => fn(u.hostname))) return href;

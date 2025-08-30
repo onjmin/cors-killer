@@ -6,13 +6,13 @@ export default defineConfig({
 			provider: "v8", // ここで v8 or istanbul を選択
 			reporter: ["text", "json", "html"],
 			reportsDirectory: "./tests/unit/coverage",
-			include: ["./src/**/*.{ts,js}"], // カバレッジ対象
+			include: ["src/**/*.{ts,js}"], // カバレッジ対象
 			exclude: [
-				"./src/index.ts",
-				"./src/**/*.d.ts",
-				"./tsup.config.ts",
-				"./vitest.config.ts",
-				"./tests/**/*",
+				"src/index.ts",
+				"src/**/*.d.ts",
+				"tsup.config.ts",
+				"vitest.config.ts",
+				"tests/**/*",
 			],
 		},
 	},

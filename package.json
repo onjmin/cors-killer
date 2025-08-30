@@ -1,0 +1,54 @@
+{
+	"author": "onjmin",
+	"license": "AGPL-3.0",
+	"name": "cors-killer",
+	"version": "1.0.1",
+	"description": "CORS制限を回避してURLを安全に扱えるユーティリティ",
+	"homepage": "https://onjmin.github.io/cors-killer",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/onjmin/cors-killer.git"
+	},
+	"bugs": {
+		"url": "https://github.com/onjmin/cors-killer/issues"
+	},
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"build": "rimraf dist && tsup && biome check src && biome format src --write",
+		"test": "vitest",
+		"test:coverage": "vitest run --coverage",
+		"prepublishOnly": "pnpm run build && pnpm run test",
+		"patch": "pnpm version patch",
+		"publish-dangerous-dont-use-this-command": "pnpm publish --access public"
+	},
+	"files": [
+		"dist"
+	],
+	"keywords": [
+		"CORS",
+		"cors-bypass",
+		"cors-proxy",
+		"cross-origin",
+		"url-sanitizer",
+		"safe-url",
+		"canvas",
+		"fetch",
+		"image",
+		"proxy"
+	],
+	"volta": {
+		"node": "22.19.0",
+		"pnpm": "10.15.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.2.2",
+		"@vitest/coverage-v8": "3.2.4",
+		"rimraf": "6.0.1",
+		"tsup": "8.5.0",
+		"typedoc": "0.28.11",
+		"typescript": "5.9.2",
+		"vitest": "3.2.4"
+	}
+}

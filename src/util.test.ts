@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { randArray } from "../src/util";
+import { randArray } from "./util";
 
 describe("randArray", () => {
 	it("配列の要素を返す", () => {

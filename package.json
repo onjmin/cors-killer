@@ -2,7 +2,7 @@
 	"author": "onjmin",
 	"license": "AGPL-3.0",
 	"name": "@onjmin/cors-killer",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "CORS制限を回避してURLを安全に扱えるユーティリティ",
 	"homepage": "https://onjmin.github.io/cors-killer",
 	"repository": {

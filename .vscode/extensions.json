@@ -1,0 +1,9 @@
+{
+	"recommendations": [
+		"biomejs.biome",
+		"usernamehw.errorlens",
+		"mhutchie.git-graph",
+		"bierner.markdown-mermaid",
+		"vitest.explorer"
+	]
+}

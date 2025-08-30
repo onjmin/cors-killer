@@ -16,7 +16,7 @@ const CORS_FREE_HOSTS = [
 /**
  * 指定された画像URLを、安全かつCanvasなどで使用できる形に整形する
  */
-export const corsKiller = (url: string) => {
+export const corsKiller = (url: string): string => {
 	let href = "";
 	try {
 		// URLオブジェクト化できなければ無効な形式として扱う
@@ -37,9 +37,10 @@ export const corsKiller = (url: string) => {
 
 	// 上記以外はCORS制限がある可能性が高いため、プロキシをランダムに使用して回避
 	// プロキシは全て公開・無認証サービス（障害時に備えて複数用意）
-	return randArray([
+	const proxied = randArray([
 		`https://api.allorigins.win/raw?url=${href}`, // オープンな汎用プロキシ（やや不安定）
 		`https://corsproxy.io/?${href}`, // AllOrigins互換の軽量プロキシ
 		`https://api.codetabs.com/v1/proxy?quest=${href}`, // 古くからあるCORS対応プロキシ
 	]);
+	return proxied ? proxied : "";
 };

@@ -17,14 +17,14 @@ CORS 制限を回避して URL を安全に扱えるユーティリティ
 
 ## インストール
 ```sh
-npm install cors-killer
+npm i @onjmin/cors-killer
 ```
 
 ## 使用例
 
 ### Node.js / ES Modules
 ```ts
-import { corsKiller } from "cors-killer";
+import { corsKiller } from "@onjmin/cors-killer";
 
 const url = "https://example.com/image.png";
 const safeUrl = corsKiller(url);

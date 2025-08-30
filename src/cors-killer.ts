@@ -19,10 +19,9 @@ const CORS_FREE_HOSTS = [
 export const corsKiller = (url: string): string => {
 	let u: URL;
 	try {
-		// URLオブジェクト化できなければ無効な形式として扱う
 		u = new URL(url);
 	} catch (_err) {
-		// パースエラー時は無効なURLとみなして空文字を返す
+		// URLオブジェクト化できなければ無効なURLとみなして空文字を返す
 		return "";
 	}
 

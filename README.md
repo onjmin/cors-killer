@@ -5,7 +5,7 @@ CORS制限を回避するモジュール
 - **CORS対応済みのURLは素通し**  
   既に CORS 対応済みの代表的なサービスの URL（例: Imgur、Wikipedia、Unsplash）や
   Base64 埋め込み形式の data URI は、そのまま返す設計。  
-  → 既に安全にアクセスできるものは手を加えず、可用性を落とさないようにする。
+  → 既に安全にアクセスできるものは手を加えず、可用性を落とさない。
 
 - **その他の URL は自動でプロキシ経由**  
   上記以外の URL は、公開・無認証のプロキシをランダムで経由して安全に取得。  
@@ -48,6 +48,7 @@ const { corsKiller } = await import("https://cdn.jsdelivr.net/npm/@onjmin/cors-k
 
 const url = "https://example.com/image.png"; // CORS非対応
 const safeUrl = corsKiller(url);
+
 console.log(safeUrl); // CORS対応済みURL
 // https://api.allorigins.win/raw?url=https://example.com/image.png
 ```
@@ -58,14 +59,15 @@ console.log(safeUrl); // CORS対応済みURL
 - コントリビュート大歓迎！興味のある方はぜひ pull request や issue を送ってほしい。
 
 ## リンク集
+- 👀 [DEMO](https://unj.netlify.app/cors-killer/demo)
+- 🛫 [仕様書](https://onjmin.github.io/cors-killer)
 - 🌟 [GitHubリポジトリ](https://github.com/onjmin/cors-killer)
-- 🛫 [仕様書 / ドキュメント](https://onjmin.github.io/cors-killer)
-- 📦 [npm パッケージ](https://www.npmjs.com/package/@onjmin/cors-killer)
+- 📦 [npmパッケージ](https://www.npmjs.com/package/@onjmin/cors-killer)
 - ✅ [カバレッジ](https://onjmin.github.io/cors-killer/coverage)
 
 ## ライセンス / License
 - **AGPL-3.0**  
-  本プロジェクト全体には AGPL-3.0 ライセンスが適用されます。詳細は ``LICENSE`` をご覧ください。
+  本プロジェクト全体には AGPL-3.0 ライセンスが適用されます。詳細は [`LICENSE`](./LICENSE) をご覧ください。
 
 ## 開発者 / Author
 - [おんJ民](https://github.com/onjmin)

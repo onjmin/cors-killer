@@ -53,4 +53,9 @@ describe("corsKiller", () => {
 		const result = corsKiller(blockedUrl);
 		expect(result).toMatch(/^https:\/\/api\.allorigins\.win\/raw\?url=/);
 	});
+
+	it("URLが長すぎる場合は空文字を返す", () => {
+		const longUrl = `https://example.com/${"a".repeat(5001)}`;
+		expect(corsKiller(longUrl)).toBe("");
+	});
 });

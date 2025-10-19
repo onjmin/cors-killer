@@ -24,6 +24,13 @@ CORS制限を回避するモジュール
 - **おんJ民が作っている**  
   質問や相談はフォーラムで: [質問フォーラム](https://unj.netlify.app)
 
+## リンク集
+- 👀 [DEMO](https://onjmin.github.io/cors-killer/demo)
+- 🛫 [仕様書](https://onjmin.github.io/cors-killer)
+- 🌟 [GitHubリポジトリ](https://github.com/onjmin/cors-killer)
+- 📦 [npmパッケージ](https://www.npmjs.com/package/@onjmin/cors-killer)
+- ✅ [カバレッジ](https://onjmin.github.io/cors-killer/coverage)
+
 ## インストール
 ```sh
 npm i @onjmin/cors-killer
@@ -57,13 +64,6 @@ console.log(safeUrl); // CORS対応済みURL
 - 現状は画像を前提に作っているが、動画、音楽、JS/CSS など、CORS が絡むその他のリソースにも対応可能。
 - その場合に備えて、テスト用関数やユーティリティも整備する必要がある。
 - コントリビュート大歓迎！興味のある方はぜひ pull request や issue を送ってほしい。
-
-## リンク集
-- 👀 [DEMO](https://onjmin.github.io/cors-killer/demo)
-- 🛫 [仕様書](https://onjmin.github.io/cors-killer)
-- 🌟 [GitHubリポジトリ](https://github.com/onjmin/cors-killer)
-- 📦 [npmパッケージ](https://www.npmjs.com/package/@onjmin/cors-killer)
-- ✅ [カバレッジ](https://onjmin.github.io/cors-killer/coverage)
 
 ## ライセンス / License
 - **AGPL-3.0**  

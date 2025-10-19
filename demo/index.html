@@ -1,0 +1,200 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@onjmin/cors-killer Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <script type="module">
+        import { corsKiller } from 'https://cdn.jsdelivr.net/npm/@onjmin/cors-killer/dist/index.min.mjs';
+
+        window.corsKiller = corsKiller;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const definedUrls = [
+                {
+                    url: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Flag_of_Japan.png',
+                    expected: '素通り (CORS OK)',
+                    isProxied: false
+                },
+                {
+                    url: 'https://i.imgur.com/k9b6c1s.png',
+                    expected: '素通り (ImgurはCORS OK)',
+                    isProxied: false
+                },
+                {
+                    url: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0BMVEUAAAD///+ZmTOhUb4AAAANlklEQVQiY2CgCAABpA//M/448d8AAAD//w==',
+                    expected: '素通り (Base64)',
+                    isProxied: false
+                },
+                {
+                    url: 'https://example.com/image.jpg',
+                    expected: 'プロキシ変換 (CORS NGの可能性)',
+                    isProxied: true
+                },
+                {
+                    url: 'http://insecure-site.com/test.gif',
+                    expected: 'プロキシ変換 (HTTPSでない)',
+                    isProxied: true
+                },
+            ];
+
+            const tableBody = document.getElementById('url-test-tbody');
+            const manualUrlInput = document.getElementById('manual-url-input');
+            const manualProcessButton = document.getElementById('manual-process-btn');
+            const manualResultCode = document.getElementById('manual-result-code');
+            const manualResultStatus = document.getElementById('manual-result-status');
+            const manualImageTestArea = document.getElementById('manual-image-test-area');
+
+            // --- 定義済みURLのテーブル生成 ---
+            definedUrls.forEach(item => {
+                const safeUrl = window.corsKiller(item.url);
+                const isActuallyProxied = safeUrl.includes('proxy') || safeUrl.includes('allorigins') || safeUrl.includes('codetabs');
+
+                let statusClass = 'text-green-600 font-bold';
+                let statusText = 'OK';
+
+                if (item.isProxied !== isActuallyProxied) {
+                    statusClass = 'text-red-600 font-bold';
+                    statusText = '意図と異なる結果';
+                }
+
+                const row = tableBody.insertRow();
+                row.className = 'border-b hover:bg-gray-50';
+
+                // 元URL
+                row.insertCell().innerHTML = `<code class="text-sm text-gray-800 break-all">${item.url}</code>`;
+                // 変換後URL
+                row.insertCell().innerHTML = `<code class="text-xs text-green-700 break-all">${safeUrl}</code>`;
+                // 期待される結果
+                row.insertCell().innerHTML = `<span class="text-sm text-gray-600">${item.expected}</span>`;
+                // ステータス
+                row.insertCell().innerHTML = `<span class="${statusClass} text-xs">${statusText}</span>`;
+            });
+
+            // --- 自由入力処理のロジック ---
+            const processManualUrl = () => {
+                const inputUrl = manualUrlInput.value.trim();
+                if (!inputUrl) {
+                    manualResultStatus.textContent = 'エラー: URLを入力してください。';
+                    manualResultCode.textContent = '';
+                    manualImageTestArea.innerHTML = '';
+                    return;
+                }
+
+                try {
+                    const safeUrl = window.corsKiller(inputUrl);
+
+                    manualResultCode.textContent = safeUrl;
+
+                    const isProxied = safeUrl.includes('proxy') || safeUrl.includes('allorigins') || safeUrl.includes('codetabs');
+
+                    manualResultStatus.className = 'font-semibold mt-2 text-sm';
+                    if (isProxied) {
+                        manualResultStatus.textContent = '✅ プロキシ変換されました';
+                        manualResultStatus.classList.add('text-red-600');
+                    } else {
+                        manualResultStatus.textContent = '✅ 素通りしました';
+                        manualResultStatus.classList.add('text-green-600');
+                    }
+
+                    manualImageTestArea.innerHTML = `
+                        <p class="font-bold text-gray-800 mb-2">画像ロードテスト:</p>
+                        <div class="border border-gray-300 p-2 max-w-xs h-32 flex items-center justify-center bg-gray-50 overflow-hidden">
+                            <img src="${safeUrl}" alt="テスト画像" class="max-w-full max-h-full object-contain" 
+                                onerror="this.parentNode.innerHTML='<span class=\\'text-red-500 text-sm\\'>画像の読み込みに失敗しました。URLを確認してください。</span>'">
+                        </div>
+                    `;
+
+                } catch (error) {
+                    manualResultStatus.textContent = `❌ エラーが発生しました: ${error.message}`;
+                    manualResultCode.textContent = '';
+                    manualImageTestArea.innerHTML = '';
+                }
+            };
+
+            manualProcessButton.addEventListener('click', processManualUrl);
+        });
+    </script>
+</head>
+
+<body class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto bg-white shadow-xl rounded-xl p-8">
+        <h1 class="text-4xl font-extrabold text-blue-700 mb-2">
+            @onjmin/cors-killer Demo 🛠️
+        </h1>
+        <p class="text-gray-600 text-lg mb-6 border-b pb-4">
+            CORS制限を回避するモジュール corsKiller の動作検証ページです。URLがプロキシ経由に変換されるか、素通りされるかを確認できます。
+        </p>
+
+        <div class="mb-10">
+            <h2 class="text-2xl font-bold text-gray-700 mb-4">テストケース一覧 (定義済み)</h2>
+            <div class="overflow-x-auto shadow-md rounded-lg border">
+                <table class="min-w-full divide-y divide-gray-200 bg-white">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">
+                                元URL
+                            </th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/2">
+                                corsKiller適用後のURL
+                            </th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/8">
+                                期待される結果
+                            </th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/8">
+                                動作検証
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="url-test-tbody" class="divide-y divide-gray-200">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div>
+            <h2 class="text-2xl font-bold text-gray-700 mb-4 border-t pt-6">自由入力テスト</h2>
+
+            <div class="flex flex-col md:flex-row gap-4 mb-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                <input id="manual-url-input" type="text" placeholder="テストしたい任意のURLを入力..."
+                    class="flex-1 border border-gray-300 p-3 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-800"
+                    value="https://picsum.photos/200/300" />
+                <button id="manual-process-btn" class="
+                        bg-blue-600 
+                        hover:bg-blue-700 
+                        text-white 
+                        font-bold 
+                        py-3 
+                        px-6 
+                        rounded-lg 
+                        shadow-md 
+                        hover:shadow-lg 
+                        transition-colors
+                    ">
+                    corsKillerを実行
+                </button>
+            </div>
+
+            <div class="space-y-4">
+                <p class="font-bold text-gray-800">変換後のURL:</p>
+                <code id="manual-result-code"
+                    class="block p-3 bg-gray-800 text-green-400 text-sm rounded-lg overflow-x-auto whitespace-pre-wrap font-mono">
+                    </code>
+                <p id="manual-result-status" class="font-semibold mt-2 text-sm text-gray-700">ボタンを押してテストを開始してください。</p>
+
+                <div id="manual-image-test-area" class="mt-4 p-4 bg-gray-100 rounded-lg border">
+                    <p class="text-gray-500">画像ロードテストの結果がここに表示されます...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

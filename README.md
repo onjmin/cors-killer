@@ -28,7 +28,7 @@ CORS制限を回避するモジュール
 - 👀 [DEMO](https://onjmin.github.io/cors-killer/demo)
 - 🛫 [仕様書](https://onjmin.github.io/cors-killer)
 - 🌟 [GitHubリポジトリ](https://github.com/onjmin/cors-killer)
-- 📦 [npmパッケージ](https://www.npmjs.com/package/@onjmin/cors-killer)
+- 📦 [npmモジュール](https://www.npmjs.com/package/@onjmin/cors-killer)
 - ✅ [カバレッジ](https://onjmin.github.io/cors-killer/coverage)
 
 ## インストール

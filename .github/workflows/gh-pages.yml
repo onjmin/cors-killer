@@ -44,6 +44,11 @@ jobs:
       - name: Copy coverage report
         run: cp -r ./coverage ./docs/coverage
 
+      - name: Copy demo/index.html to docs/demo/
+        run: |
+          mkdir -p docs/demo
+          cp demo/index.html docs/demo/index.html
+
       - name: Add .nojekyll
         run: touch ./docs/.nojekyll
 

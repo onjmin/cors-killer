@@ -59,7 +59,7 @@ console.log(safeUrl); // CORS対応済みURL
 - コントリビュート大歓迎！興味のある方はぜひ pull request や issue を送ってほしい。
 
 ## リンク集
-- 👀 [DEMO](https://unj.netlify.app/cors-killer/demo)
+- 👀 [DEMO](https://onjmin.github.io/oekaki/demo)
 - 🛫 [仕様書](https://onjmin.github.io/cors-killer)
 - 🌟 [GitHubリポジトリ](https://github.com/onjmin/cors-killer)
 - 📦 [npmパッケージ](https://www.npmjs.com/package/@onjmin/cors-killer)

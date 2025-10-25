@@ -65,6 +65,14 @@ console.log(safeUrl); // CORS対応済みURL
 - その場合に備えて、テスト用関数やユーティリティも整備する必要がある。
 - コントリビュート大歓迎！興味のある方はぜひ pull request や issue を送ってほしい。
 
+## コントリビュート方法
+- 開発環境
+  - 推奨エディタ: vscode
+  - 開発言語: TypeScript
+  - 実行環境: Volta / pnpm / Biome
+- 開発コマンド
+  - `pnpm run dev`: http://localhost:2783 から動作確認可能
+
 ## ライセンス / License
 - **AGPL-3.0**  
   本プロジェクト全体には AGPL-3.0 ライセンスが適用されます。詳細は [`LICENSE`](./LICENSE) をご覧ください。

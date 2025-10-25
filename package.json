@@ -16,6 +16,7 @@
 	"module": "dist/index.mjs",
 	"types": "dist/index.d.ts",
 	"scripts": {
+		"dev": "rimraf dist && tsup && biome format src --write && tsx demo/server.ts",
 		"build": "rimraf dist && tsup && biome check src && biome format src --write",
 		"test": "vitest",
 		"test:coverage": "vitest run --coverage",
@@ -44,9 +45,12 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.2",
+		"@hono/node-server": "1.19.5",
 		"@vitest/coverage-v8": "3.2.4",
+		"hono": "4.10.3",
 		"rimraf": "6.0.1",
 		"tsup": "8.5.0",
+		"tsx": "4.20.6",
 		"typedoc": "0.28.11",
 		"typescript": "5.9.2",
 		"vitest": "3.2.4"

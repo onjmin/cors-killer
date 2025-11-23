@@ -73,9 +73,8 @@ console.log(safeUrl); // CORS対応済みURL
 - 開発コマンド
   - `pnpm run dev`: http://localhost:2783 から動作確認可能
 
-## ライセンス / License
-- **AGPL-3.0**  
-  本プロジェクト全体には AGPL-3.0 ライセンスが適用されます。詳細は [`LICENSE`](./LICENSE) をご覧ください。
+## ライセンス
+- [MIT](./LICENSE)
 
 ## 開発者 / Author
 - [おんJ民](https://github.com/onjmin)

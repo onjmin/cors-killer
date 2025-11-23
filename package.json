@@ -2,7 +2,7 @@
 	"author": "onjmin",
 	"license": "MIT",
 	"name": "@onjmin/cors-killer",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"description": "CORS制限を回避するモジュール",
 	"homepage": "https://onjmin.github.io/cors-killer",
 	"repository": {
